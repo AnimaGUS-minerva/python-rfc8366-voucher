@@ -1,0 +1,6 @@
+src/*.egg-info
+src/voucher/**/*.c
+.eggs
+local
+build
+dist
