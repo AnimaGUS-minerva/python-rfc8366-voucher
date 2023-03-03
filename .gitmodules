@@ -1,0 +1,3 @@
+[submodule "voucher"]
+	path = voucher
+	url = https://github.com/AnimaGUS-minerva/voucher
