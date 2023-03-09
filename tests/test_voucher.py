@@ -15,6 +15,11 @@ def test_voucher_version():
 
 
 
+
+
+
+
+
 if 0:  # !!!! content of test_sample.py - https://docs.pytest.org/en/7.1.x/getting-started.html
     def func(x):
         return x + 1
