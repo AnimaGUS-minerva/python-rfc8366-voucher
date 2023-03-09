@@ -1,4 +1,10 @@
+SHELL := /bin/bash
+
 all: dist
+
+ci:
+	pipenv install
+	make test
 
 PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) python3
 test: dist
