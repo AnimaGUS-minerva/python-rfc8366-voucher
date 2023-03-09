@@ -21,6 +21,12 @@ jobs:
             os: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
+    - name: Install rust nightly
+      run: |
+        curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+        rustup toolchain install nightly-x86_64-unknown-linux-gnu
+        rustup target add x86_64-unknown-linux-gnu
+        rustup default nightly
     - name: Install pipenv
       run: pip install pipenv
     - name: Run test
