@@ -8,7 +8,7 @@ ci:
 
 PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python
 test: dist
-	cd ./dist && $(PYTHON) < ../tests/micropython.py  # compat
+	cd ./dist && $(PYTHON) < ../tests/batch.py  # compat
 	cd ./dist && $(PYTHON) -m pytest ../tests/
 
 #
