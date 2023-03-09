@@ -3,12 +3,13 @@ SHELL := /bin/bash
 all: dist
 
 ci:
-	pipenv install
+	pipenv install --dev
 	make test
 
-PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python3
+PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python
 test: dist
-	cd ./dist && $(PYTHON) < ../test.py
+	cd ./dist && $(PYTHON) < ../tests/micropython.py  # compat
+	cd ./dist && $(PYTHON) -m pytest ../tests/
 
 #
 
@@ -38,7 +39,7 @@ export SETUP_EXTENSION_LIBS := voucher_if
 
 dist: local
 	ls -lrt local/include local/lib
-	pipenv run python3 ./setup.py bdist_wheel
+	pipenv run python ./setup.py bdist_wheel
 	cd ./dist && \
 		rm -rf voucher python_voucher-*info && \
 		unzip python_voucher-*.whl && \
