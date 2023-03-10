@@ -2,6 +2,9 @@ SHELL := /bin/bash
 
 all: dist
 
+doc:
+	pipenv run make html -C docs
+
 ci:
 	pipenv install --dev
 	make test

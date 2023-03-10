@@ -9,6 +9,7 @@ name = "pypi"
 pytest = "*"
 exceptiongroup = "*"
 sphinx = "*"
+sphinx-rtd-theme = "*"
 
 [requires]
 python_version = "3.10"
