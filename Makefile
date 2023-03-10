@@ -7,6 +7,7 @@ doc:
 
 ci:
 	pipenv install --dev
+	make doc
 	make test
 
 PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python
