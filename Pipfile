@@ -8,6 +8,7 @@ name = "pypi"
 [dev-packages]
 pytest = "*"
 exceptiongroup = "*"
+sphinx = "*"
 
 [requires]
 python_version = "3.10"
