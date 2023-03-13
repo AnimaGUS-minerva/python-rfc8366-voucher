@@ -6,16 +6,13 @@ _voucher = voucher.voucher  # debug
 
 
 def test_voucher_mbedtls_version():
-    import voucher.mbedtls.version as mbedtls_version
+    from voucher import mbedtls_version
 
     assert mbedtls_version.version.startswith('mbed TLS 3.')
+    assert mbedtls_version.version_info[0] == 3
 
 def test_voucher_version():
-    assert voucher.voucher.version.startswith('Rust voucher ')
-
-
-
-
+    assert voucher.version.startswith('Rust voucher ')
 
 
 

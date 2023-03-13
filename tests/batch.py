@@ -27,16 +27,19 @@ def test_assert(title, condition):
 
 
 def test_voucher_mbedtls_version():
-    import voucher.mbedtls.version as mbedtls_version
+    from voucher import mbedtls_version
 
     print('==== test_voucher_mbedtls_version(): ^^')
     print('mbedtls_version.version:', mbedtls_version.version)
     test_assert('mbedtls_version.version', mbedtls_version.version.startswith('mbed TLS 3.'))
 
+    print('mbedtls_version.version_info:', mbedtls_version.version_info)
+    test_assert_eq('mbedtls_version.version_info', mbedtls_version.version_info[0], 3)
+
 def test_voucher_version():
     print('==== test_voucher_version(): ^^')
     print('voucher.version:', voucher.version)
-    test_assert('voucher.version', voucher.voucher.version.startswith('Rust voucher '))
+    test_assert('voucher.version', voucher.version.startswith('Rust voucher '))
 
 def test_voucher_apis():
     print('==== test_voucher_apis(): ^^')
