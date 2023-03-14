@@ -68,14 +68,17 @@ information of the mbed TLS backend:
 !! ex prelude
 -------------
 
-WIP description::
+WIP description
+
+..  code-block:: python3
 
     import voucher
     from voucher import *  # Vrq, Vch, ATTR_*, ...
     from voucher import from_cbor
 
     import os
-    VOUCHER_SAMPLE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../voucher/data')
+    VOUCHER_SAMPLE_DIR = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), '../voucher/data')
 
     def read_bytes_from(filepath):
         return open(filepath, 'rb').read()
@@ -84,7 +87,9 @@ WIP description::
 !! ex 1/3
 ---------
 
-WIP description::
+WIP description
+
+..  code-block:: python3
 
     # Create an empty voucher request.
     vrq = Vrq()
@@ -131,7 +136,9 @@ WIP description::
 !! ex 2/3
 ---------
 
-WIP description::
+WIP description
+
+..  code-block:: python3
 
     # Create a voucher request with five attributes.
     vrq = Vrq()
@@ -155,7 +162,9 @@ WIP description::
 !! ex 3/3
 ---------
 
-WIP description::
+WIP description
+
+..  code-block:: python3
 
     VCH_F2_00_02 = read_bytes_from(
         os.path.join(VOUCHER_SAMPLE_DIR, '00-D0-E5-F2-00-02/voucher_00-D0-E5-F2-00-02.vch'))

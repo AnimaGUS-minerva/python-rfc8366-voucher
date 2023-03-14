@@ -57,7 +57,8 @@ def test_example_attributes():
 
 
 import os
-VOUCHER_SAMPLE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../voucher/data')
+VOUCHER_SAMPLE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), '../voucher/data')
 
 def read_bytes_from(filepath):
     return open(filepath, 'rb').read()
