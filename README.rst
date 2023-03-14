@@ -48,8 +48,8 @@ Usage and examples
 In this section, we show how to use the basic parts of the library.
 
 
-Check versions of the underlying libraries used by python-rfc8366-voucher
--------------------------------------------------------------------------
+Checking the underlying library versions
+----------------------------------------
 
 *voucher.version* keeps the version string of the Rust-based voucher crate:
 
