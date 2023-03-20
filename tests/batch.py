@@ -1,6 +1,6 @@
 import voucher
-from voucher import *  # Vrq, Vch, ATTR_*, ...
-from voucher import from_cbor
+from voucher import *  # Vrq, Vch, from_cbor, ATTR_*, ...
+import sys
 
 #
 
@@ -17,12 +17,11 @@ _voucher = voucher if is_micropython else voucher.voucher  # debug
 
 if 1:  # debug
     print('@@ dir(voucher):', dir(voucher))
-    #print('@@ dir(voucher.voucher):', dir(voucher.voucher))
     print('@@ ATTR_NONCE:', ATTR_NONCE)
-    #exit()
+    #sys.exit()  # !!!!
 
+#
 
-#### #### #### #### TODO refactor w.r.t. 'ports/riot/main/boot.py'
 def test_assert_eq(title, left, right, diag=True):
     result = left == right
     print('[test]', title, ':', '✅' if result else '❌')
@@ -33,8 +32,96 @@ def test_assert_eq(title, left, right, diag=True):
 
 def test_assert(title, condition):
     test_assert_eq(title, condition, True, diag=False)
-#### #### #### ####
 
+#
+
+if 1 and is_micropython:
+    #---- test misc.
+    test_assert_eq('bytes from list', bytes([17, 34, 51]), b'\x11\x22\x33')
+    test_assert_eq('list from bytes', list(b'\x11\x22\x33'), [17, 34, 51])
+
+    #---- test `voucher` module; legacy
+    tpl = debug_test_ffi()
+    test_assert_eq('debug_test_ffi',
+        tpl, (42, False, None, True, False, b'\xa0\xb1\xc2\xd3\xe4\xf5', False))
+    # print(tpl)
+
+    init_psa_crypto()
+
+    bs_jada = debug_get_vch_jada()
+    test_assert_eq('debug_get_vch_jada', len(bs_jada), 328)
+    # print(len(bs_jada), bs_jada, list(bs_jada))
+
+    bs_f2 = debug_get_vch_F2_00_02()
+    test_assert_eq('debug_get_vch_F2_00_02', len(bs_f2), 771)
+    # print(len(bs_f2), bs_f2)
+
+    bs_pem_f2 = debug_get_masa_pem_F2_00_02()
+    test_assert_eq('debug_get_masa_pem_F2_00_02', len(bs_pem_f2), 684)
+    # print(len(bs_pem_f2), bs_pem_f2)
+
+    # The default `MP_RIOT_HEAPSIZE ?= 8192U` set in Makefile is not enough
+    try:
+        n = len(list(bs_jada))
+    except MemoryError:
+        n = -1
+    test_assert_eq('no MemoryError for simple ops', n, 328)
+
+    test_assert('debug_validate - jada', debug_validate(bs_jada))
+    test_assert('debug_validate - F2_00_02', debug_validate(bs_f2, bs_pem_f2))
+
+    # debug_dump(bs_jada)  # TODO handle panic on decode failure
+
+    #
+
+    bs_key_pem_f2 = debug_get_key_pem_F2_00_02()
+    test_assert_eq('debug_get_key_pem_F2_00_02', len(bs_key_pem_f2), 227)
+
+    bs_device_crt_f2 = debug_get_device_crt_F2_00_02()
+    test_assert_eq('debug_get_device_crt_F2_00_02', len(bs_device_crt_f2), 644)
+
+    #
+
+    bs_vrq_sample = debug_get_vrq_F2_00_02()
+    test_assert_eq('bs_vrq_sample (with bare signature)', len(bs_vrq_sample), 622)
+
+    test_assert('debug_{sign,validate} - vrq sample F2_00_02 via pubkey',
+        debug_validate(bs_vrq_sample, bs_device_crt_f2))
+    test_assert('debug_{sign,validate} - vrq sample F2_00_02 via privkey',
+        debug_validate(bs_vrq_sample, bs_key_pem_f2))
+
+    #
+
+    bs_vrq = debug_create_vrq_F2_00_02()
+    # print('bs_vrq', list(bs_vrq))
+    test_assert_eq('bs_vrq', len(bs_vrq), 555)
+
+    test_assert('debug_{sign,validate} - validating an unsigned voucher should fail',
+        not debug_validate(bs_vrq, bs_device_crt_f2))
+
+    bs_vrq_signed = debug_sign(bs_vrq, bs_key_pem_f2, SA_ES256)
+    # print('bs_vrq_signed', list(bs_vrq_signed))
+    test_assert_eq('bs_vrq_signed (with asn1 signature)', len(bs_vrq_signed), 630)
+
+    test_assert('debug_{sign,validate} - vrq F2_00_02 via pubkey',
+        debug_validate(bs_vrq_signed, bs_device_crt_f2))
+    test_assert('debug_{sign,validate} - vrq F2_00_02 via privkey',
+        debug_validate(bs_vrq_signed, bs_key_pem_f2))
+
+    #
+
+    import gc
+    for _ in range(0, 2):
+        vrq = voucher.vrq()
+        print('(before gc) heap:', gc.mem_free())
+        del vrq
+        gc.collect()  # finalizer `mp_vou_del()` should be invoked via `__del__`
+        print('(after gc) heap:', gc.mem_free())
+
+
+sys.exit()  # !!!!
+
+#
 
 def test_voucher_mbedtls_version():
     from voucher import mbedtls_version
