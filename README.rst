@@ -38,8 +38,8 @@ our internal Cython module builds and Sphinx based docs.
 Installation
 ============
 
-The bindings are tested with AnimaGUS-minerva/voucher 0.8.8 for Python 3.10,
-and 3.11 on Linux and macOS.
+The bindings are tested with [AnimaGUS-minerva/voucher](https://github.com/AnimaGUS-minerva/voucher)
+0.8.8 for Python 3.10, and 3.11 on Linux and macOS.
 
 
 Usage and examples

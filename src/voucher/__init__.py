@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2023, ANIMA Minerva toolkit
 
-"""python-voucher is a wrapper to the Minerva voucher library."""
+"""A wrapper around the "RFC8366 Voucher" Rust library crate."""
 
 from .mbedtls import version as mbedtls_version
 from .voucher import Vrq
