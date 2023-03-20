@@ -2,8 +2,18 @@ import voucher
 from voucher import *  # Vrq, Vch, ATTR_*, ...
 from voucher import from_cbor
 
-_voucher = voucher.voucher  # debug
+#
 
+is_micropython = False
+try:
+    _ = voucher.version
+except AttributeError:
+    is_micropython = True
+print('@@ is_micropython:', is_micropython)
+
+#
+
+_voucher = voucher if is_micropython else voucher.voucher  # debug
 
 if 1:  # debug
     print('@@ dir(voucher):', dir(voucher))
