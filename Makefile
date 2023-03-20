@@ -11,10 +11,14 @@ ci:
 	make test
 
 PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python
-test: dist
+test-batch: dist
 	cd ./dist && $(PYTHON) < ../tests/batch.py  # compat
+test-pytest: dist
 	cd ./dist && $(PYTHON) -m pytest --collect-only --quiet ../tests/  # list tests
 	cd ./dist && $(PYTHON) -m pytest ../tests/  # run tests
+test:
+	make test-batch
+	make test-pytest
 
 #
 
