@@ -1,5 +1,5 @@
 import voucher
-from voucher import *  # Vrq, Vch, from_cbor, ATTR_*, ...
+from voucher import *  # Vrq, Vch, {ATTR,SA}_*, ...
 from voucher import from_cbor
 import sys
 
@@ -14,7 +14,7 @@ print('@@ is_micropython:', is_micropython)
 
 #
 
-_voucher = voucher if is_micropython else voucher.voucher  # debug
+_voucher = voucher if is_micropython else voucher.voucher  # for the `debug_*()` methods
 
 if 1:  # debug
     print('@@ dir(voucher):', dir(voucher))
@@ -111,7 +111,7 @@ if 1 and is_micropython:  # test `voucher` module; legacy
 
     import gc
     for _ in range(0, 2):
-        vrq = voucher.vrq()
+        vrq = Vrq()
         print('(before gc) heap:', gc.mem_free())
         del vrq
         gc.collect()  # finalizer `mp_vou_del()` should be invoked via `__del__`
@@ -142,6 +142,9 @@ if 1 and not is_micropython:
 
 def test_voucher_apis():
     print('==== test_voucher_apis(): ^^')
+
+    if is_micropython:
+        init_psa_crypto()
 
     vrq = Vrq()
     #help(vrq)

@@ -435,10 +435,8 @@ const mp_obj_type_t voucher_vch_type = {
 
 STATIC const mp_rom_map_elem_t mp_module_voucher_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_voucher) },
-    { MP_ROM_QSTR(MP_QSTR_vrq), MP_ROM_PTR(&voucher_vrq_type) },
-    { MP_ROM_QSTR(MP_QSTR_vch), MP_ROM_PTR(&voucher_vch_type) },
-//todo    { MP_ROM_QSTR(MP_QSTR_Vrq), MP_ROM_PTR(&voucher_vrq_type) },
-//todo    { MP_ROM_QSTR(MP_QSTR_Vch), MP_ROM_PTR(&voucher_vch_type) },
+    { MP_ROM_QSTR(MP_QSTR_Vrq), MP_ROM_PTR(&voucher_vrq_type) },
+    { MP_ROM_QSTR(MP_QSTR_Vch), MP_ROM_PTR(&voucher_vch_type) },
     { MP_ROM_QSTR(MP_QSTR_from_cbor), MP_ROM_PTR(&mp_vou_from_cbor_obj) },
     { MP_ROM_QSTR(MP_QSTR_init_psa_crypto), MP_ROM_PTR(&mp_vou_init_psa_crypto_obj) },
     { MP_ROM_QSTR(MP_QSTR_ATTR_ASSERTION), MP_ROM_INT(ATTR_ASSERTION) },
