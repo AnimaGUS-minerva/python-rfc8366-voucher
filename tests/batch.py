@@ -1,5 +1,6 @@
 import voucher
 from voucher import *  # Vrq, Vch, from_cbor, ATTR_*, ...
+from voucher import from_cbor
 import sys
 
 #
@@ -35,12 +36,10 @@ def test_assert(title, condition):
 
 #
 
-if 1 and is_micropython:
-    #---- test misc.
+if 1 and is_micropython:  # test `voucher` module; legacy
     test_assert_eq('bytes from list', bytes([17, 34, 51]), b'\x11\x22\x33')
     test_assert_eq('list from bytes', list(b'\x11\x22\x33'), [17, 34, 51])
 
-    #---- test `voucher` module; legacy
     tpl = debug_test_ffi()
     test_assert_eq('debug_test_ffi',
         tpl, (42, False, None, True, False, b'\xa0\xb1\xc2\xd3\xe4\xf5', False))
@@ -118,9 +117,6 @@ if 1 and is_micropython:
         gc.collect()  # finalizer `mp_vou_del()` should be invoked via `__del__`
         print('(after gc) heap:', gc.mem_free())
 
-
-sys.exit()  # !!!!
-
 #
 
 def test_voucher_mbedtls_version():
@@ -138,6 +134,12 @@ def test_voucher_version():
     print('voucher.version:', voucher.version)
     test_assert('voucher.version', voucher.version.startswith('Rust voucher '))
 
+if 1 and not is_micropython:
+    test_voucher_mbedtls_version()
+    test_voucher_version()
+
+#
+
 def test_voucher_apis():
     print('==== test_voucher_apis(): ^^')
 
@@ -148,6 +150,8 @@ def test_voucher_apis():
     vch = Vch()
     #help(vch)
     #vch.debug_dump()
+
+    #sys.exit()  # !!!!
 
     #
 
@@ -389,8 +393,5 @@ def test_voucher_apis():
 
     print('==== test_voucher_apis(): vv')
 
-
-if 1:
-    test_voucher_mbedtls_version()
-    test_voucher_version()
+if 1:  # common to python3 and micropython
     test_voucher_apis()
