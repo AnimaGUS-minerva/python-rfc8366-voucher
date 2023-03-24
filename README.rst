@@ -97,7 +97,7 @@ In this example, we demonstrate how to use the ``Vrq`` class for a "Voucher Requ
 created by ``Vrq()``.  (Note that all of the methods belonging to the ``Vrq`` instance shown below
 can also be called by a "Voucher" instance created by ``Vch()``.)
 
-.. _Constrained BRSKI:https://www.ietf.org/archive/id/draft-ietf-anima-constrained-voucher-15.html
+.. _Constrained BRSKI: https://www.ietf.org/archive/id/draft-ietf-anima-constrained-voucher-15.html
 
 ..  code-block:: python3
 
@@ -175,7 +175,14 @@ COSE-sign it, and finally encode it into a CBOR byte string.
 Example 3: Decoding a CBOR-encoded voucher into an instance
 -----------------------------------------------------------
 
-WIP description
+To decode a COSE-signed CBOR-encoded voucher, use ``voucher.from_cbor()``.
+
+In this example, we decode a BRSKI "Voucher" sample in the
+`00-D0-E5-F2-00-02 constrained voucher directory`_
+into a ``Vch`` instance, COSE-validate it, and iterate through each attribute in the voucher.
+
+_00-D0-E5-F2-00-02 constrained voucher directory: https://github.com/AnimaGUS-minerva/voucher/tree/master/data/00-D0-E5-F2-00-02
+
 
 ..  code-block:: python3
 
