@@ -39,7 +39,7 @@ Installation
 ============
 
 The bindings are tested with `AnimaGUS-minerva/voucher`_ 0.8.8 for
- Python 3.10, and 3.11 on Linux and macOS.
+Python 3.10, and 3.11 on Linux and macOS.
 
 .. _AnimaGUS-minerva/voucher: https://github.com/AnimaGUS-minerva/voucher
 
@@ -85,18 +85,19 @@ WIP description
         return open(filepath, 'rb').read()
 
 
-Example (1/3): Using the ``Vrq`` (and ``Vch``) class
-----------------------------------------------------
+Example 1/3: Using the ``Vrq`` (and ``Vch``) class
+--------------------------------------------------
 
 Each ``voucher.Vrq`` and ``voucher.Vch`` class abstracts "Voucher Request" and "Voucher" artifacts of
-Constrained BRSKI, respectively. Once the class is instatiated, we can manage its attributes
+`Constrained BRSKI`_, respectively. Once the class is instantiated, we can manage its attributes
 using the dedicated API methods (``.get()``, ``.set()``, ``.remove()``, etc.).
 These methods operate with ``ATTR_*`` constants that represents the BRSKI voucher attributes.
 
-In this example, we demonstrate how to use the ``Vrq`` class for a "voucher request" instance
+In this example, we demonstrate how to use the ``Vrq`` class for a "Voucher Request" instance
 created by ``Vrq()``.  (Note that all of the methods belonging to the ``Vrq`` instance shown below
-can also be called by a "voucher" instance created by ``Vch()``.)
+can also be called by a "Voucher" instance created by ``Vch()``.)
 
+.. _`Constrained BRSKI`:https://www.ietf.org/archive/id/draft-ietf-anima-constrained-voucher-15.html
 
 ..  code-block:: python3
 
@@ -142,8 +143,8 @@ can also be called by a "voucher" instance created by ``Vch()``.)
     """
 
 
-Example (2/3): Encoding a Voucher into CBOR
--------------------------------------------
+Example 2/3: Encoding a Voucher into CBOR
+-----------------------------------------
 
 WIP description
 
@@ -168,8 +169,8 @@ WIP description
     assert len(cbor) == 630
 
 
-Example (3/3): Decoding a CBOR-encoded voucher into an instance
----------------------------------------------------------------
+Example 3/3: Decoding a CBOR-encoded voucher into an instance
+-------------------------------------------------------------
 
 WIP description
 
