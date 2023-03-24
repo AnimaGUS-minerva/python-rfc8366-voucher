@@ -85,8 +85,8 @@ WIP description
         return open(filepath, 'rb').read()
 
 
-Example 1/3: Using the ``Vrq`` (and ``Vch``) class
---------------------------------------------------
+Example 1: Using the ``Vrq``/``Vch`` class
+------------------------------------------
 
 Each ``voucher.Vrq`` and ``voucher.Vch`` class abstracts "Voucher Request" and "Voucher" artifacts of
 `Constrained BRSKI`_, respectively. Once the class is instantiated, we can manage its attributes
@@ -97,7 +97,7 @@ In this example, we demonstrate how to use the ``Vrq`` class for a "Voucher Requ
 created by ``Vrq()``.  (Note that all of the methods belonging to the ``Vrq`` instance shown below
 can also be called by a "Voucher" instance created by ``Vch()``.)
 
-.. _`Constrained BRSKI`:https://www.ietf.org/archive/id/draft-ietf-anima-constrained-voucher-15.html
+.. _Constrained BRSKI:https://www.ietf.org/archive/id/draft-ietf-anima-constrained-voucher-15.html
 
 ..  code-block:: python3
 
@@ -143,10 +143,13 @@ can also be called by a "Voucher" instance created by ``Vch()``.)
     """
 
 
-Example 2/3: Encoding a Voucher into CBOR
------------------------------------------
+Example 2: Encoding a ``voucher`` into CBOR
+-------------------------------------------
 
-WIP description
+To encode a ``voucher`` instance into a compact CBOR-encoded voucher, use the ``.serialize()`` API.
+
+In this example, we instantiate a new voucher request, populate it with some attributes,
+COSE-sign it, and finally encode it into a CBOR byte string.
 
 ..  code-block:: python3
 
@@ -169,8 +172,8 @@ WIP description
     assert len(cbor) == 630
 
 
-Example 3/3: Decoding a CBOR-encoded voucher into an instance
--------------------------------------------------------------
+Example 3: Decoding a CBOR-encoded voucher into an instance
+-----------------------------------------------------------
 
 WIP description
 
