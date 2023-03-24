@@ -175,13 +175,13 @@ COSE-sign it, and finally encode it into a CBOR byte string.
 Example 3: Decoding a CBOR-encoded voucher into an instance
 -----------------------------------------------------------
 
-To decode a COSE-signed CBOR-encoded voucher, use ``voucher.from_cbor()``.
+To decode a COSE-signed CBOR-encoded voucher, use the ``voucher.from_cbor`` method.
 
 In this example, we decode a BRSKI "Voucher" sample in the
 `00-D0-E5-F2-00-02 constrained voucher directory`_
 into a ``Vch`` instance, COSE-validate it, and iterate through each attribute in the voucher.
 
-_00-D0-E5-F2-00-02 constrained voucher directory: https://github.com/AnimaGUS-minerva/voucher/tree/master/data/00-D0-E5-F2-00-02
+.. _00-D0-E5-F2-00-02 constrained voucher directory: https://github.com/AnimaGUS-minerva/voucher/tree/master/data/00-D0-E5-F2-00-02
 
 
 ..  code-block:: python3
