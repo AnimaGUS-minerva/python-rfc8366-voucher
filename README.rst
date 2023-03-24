@@ -38,9 +38,10 @@ our internal Cython module builds and Sphinx based docs.
 Installation
 ============
 
-The bindings are tested with [AnimaGUS-minerva/voucher](https://github.com/AnimaGUS-minerva/voucher)
-0.8.8 for Python 3.10, and 3.11 on Linux and macOS.
+The bindings are tested with `AnimaGUS-minerva/voucher`_ 0.8.8 for
+ Python 3.10, and 3.11 on Linux and macOS.
 
+.. _AnimaGUS-minerva/voucher: https://github.com/AnimaGUS-minerva/voucher
 
 Usage and examples
 ==================
@@ -51,13 +52,13 @@ In this section, we show how to use the basic parts of the library.
 Checking the underlying library versions
 ----------------------------------------
 
-*voucher.version* keeps the version string of the Rust-based voucher crate:
+``voucher.version`` keeps the version string of the Rust-based voucher crate:
 
 >>> import voucher
 >>> _ = voucher.version  # 'Rust voucher 0.8.8'
 
 
-Using the *voucher.mbedtls_version* module, we can obtain the run-time version
+Using the ``voucher.mbedtls_version`` module, we can obtain the run-time version
 information of the mbed TLS backend:
 
 >>> from voucher import mbedtls_version
@@ -84,10 +85,18 @@ WIP description
         return open(filepath, 'rb').read()
 
 
-!! ex 1/3
----------
+Example (1/3): Using the ``Vrq`` (and ``Vch``) class
+----------------------------------------------------
 
-WIP description
+Each ``voucher.Vrq`` and ``voucher.Vch`` class abstracts "Voucher Request" and "Voucher" artifacts of
+Constrained BRSKI, respectively. Once the class is instatiated, we can manage its attributes
+using the dedicated API methods (``.get()``, ``.set()``, ``.remove()``, etc.).
+These methods operate with ``ATTR_*`` constants that represents the BRSKI voucher attributes.
+
+In this example, we demonstrate how to use the ``Vrq`` class for a "voucher request" instance
+created by ``Vrq()``.  (Note that all of the methods belonging to the ``Vrq`` instance shown below
+can also be called by a "voucher" instance created by ``Vch()``.)
+
 
 ..  code-block:: python3
 
@@ -133,8 +142,8 @@ WIP description
     """
 
 
-!! ex 2/3
----------
+Example (2/3): Encoding a Voucher into CBOR
+-------------------------------------------
 
 WIP description
 
@@ -159,8 +168,8 @@ WIP description
     assert len(cbor) == 630
 
 
-!! ex 3/3
----------
+Example (3/3): Decoding a CBOR-encoded voucher into an instance
+---------------------------------------------------------------
 
 WIP description
 
