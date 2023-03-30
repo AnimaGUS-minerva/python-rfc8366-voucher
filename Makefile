@@ -12,13 +12,13 @@ ci:
 
 PYTHON := LD_LIBRARY_PATH=../local/lib:$(LD_LIBRARY_PATH) pipenv run python
 test-batch: dist
-	cd ./dist && $(PYTHON) < ../tests/batch.py  # compat
+	cd ./dist && $(PYTHON) < ../tests/batch.py  # batch tests compatible with micropython
 test-pytest: dist
 	cd ./dist && $(PYTHON) -m pytest --collect-only --quiet ../tests/  # list tests
 	cd ./dist && $(PYTHON) -m pytest ../tests/  # run tests
 test-pip-install: dist
 	pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl
-	pipenv run pip list
+	#pipenv run pip list
 	pipenv run python ./tests/batch.py
 	pipenv run pip uninstall -y python-voucher
 test:
