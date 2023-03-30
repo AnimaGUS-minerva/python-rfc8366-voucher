@@ -13,10 +13,15 @@ python-rfc8366-voucher
    :target: https://github.com/AnimaGUS-minerva/python-rfc8366-voucher/actions
 
 
-`python-rfc8366-voucher`_ is a Python bindings around the (compact CBOR-encoded) RFC8366 Voucher `Rust library crate`_.
+`python-rfc8366-voucher`_ is a Python bindings around the (compact CBOR-encoded) RFC8366 Voucher
+`Rust library crate`_.
+
+The bindings are tested with `AnimaGUS-minerva/voucher`_ v0.8.8 for
+Python 3.10, and 3.11 on Linux and macOS.
 
 .. _python-rfc8366-voucher: https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
 .. _Rust library crate: https://github.com/AnimaGUS-minerva/voucher
+.. _AnimaGUS-minerva/voucher: https://github.com/AnimaGUS-minerva/voucher
 
 
 API documentation
@@ -38,8 +43,7 @@ our internal Cython module builds and Sphinx based docs.
 Installation
 ============
 
-The bindings are tested with `AnimaGUS-minerva/voucher`_ v0.8.8 for
-Python 3.10, and 3.11 on Linux and macOS.
+To locally install the ``python-voucher`` module with ``pip``:
 
 ..  code-block::
 
@@ -49,9 +53,8 @@ Python 3.10, and 3.11 on Linux and macOS.
     $ pip install --force-reinstall ./dist/python_voucher-*.whl
 
 
-For uninstallation, try ``pip uninstall python-voucher``.
+To uninstall, try ``pip uninstall python-voucher``.
 
-.. _AnimaGUS-minerva/voucher: https://github.com/AnimaGUS-minerva/voucher
 
 Usage and examples
 ==================
