@@ -76,10 +76,15 @@ information of the mbed TLS backend:
 >>> _ = mbedtls_version.version_info  # (3, 0, 0)
 
 
-!! ex prelude
--------------
+Basic ``voucher`` examples
+--------------------------
 
-WIP description
+Here we introduce the ``voucher`` abstraction offered by this library,
+along with its API methods used when dealing with the BRSKI voucher attributes.
+We then present some practical examples on how to perfrom CBOR encoding/decoding of BRSKI vouchers
+with the underlying COSE signing and validation operations also considered.
+
+In each of the examples, we assume that the following preparatory code block has been already executed:
 
 ..  code-block:: python3
 
@@ -96,7 +101,7 @@ WIP description
 
 
 Example 1: Using the ``Vrq``/``Vch`` class
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each ``voucher.Vrq`` and ``voucher.Vch`` class abstracts "Voucher Request" and "Voucher" artifacts of
 `Constrained BRSKI`_, respectively. Once the class is instantiated, we can manage its attributes
@@ -114,17 +119,17 @@ can also be called by a "Voucher" instance created by ``Vch()``.)
     # Create an empty voucher request.
     vrq = Vrq()
 
-    # Add some attributes.
-    vrq[ATTR_ASSERTION] = ASSERTION_PROXIMITY
-    vrq[ATTR_CREATED_ON] = 1599086034
-    vrq[ATTR_SERIAL_NUMBER] = '00-D0-E5-F2-00-02'
+    # Add some attributes (the object is subscriptable for "setter" operations).
+    vrq[ATTR_ASSERTION] = ASSERTION_PROXIMITY      # vrq.set(ATTR_ASSERTION, ASSERTION_PROXIMITY)
+    vrq[ATTR_CREATED_ON] = 1599086034              # vrq.set(ATTR_CREATED_ON, 1599086034)
+    vrq[ATTR_SERIAL_NUMBER] = '00-D0-E5-F2-00-02'  # vrq.set(ATTR_SERIAL_NUMBER, '00-D0-E5-F2-00-02')
 
     # Count attributes.
     assert len(vrq) == 3
 
-    # Check for specific ones.
-    assert vrq[ATTR_CREATED_ON] == 1599086034
-    assert vrq[ATTR_EXPIRES_ON] == None
+    # Check for specific ones (the object is subscriptable for "getter" operations).
+    assert vrq[ATTR_CREATED_ON] == 1599086034      # assert vrq.get(ATTR_CREATED_ON) == 1599086034
+    assert vrq[ATTR_EXPIRES_ON] == None            # assert vrq.get(ATTR_EXPIRES_ON) == None
 
     # Remove a specific one.
     assert vrq.remove(ATTR_CREATED_ON) == True
@@ -154,7 +159,7 @@ can also be called by a "Voucher" instance created by ``Vch()``.)
 
 
 Example 2: Encoding a ``voucher`` into CBOR
--------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To encode a ``voucher`` instance into a compact CBOR-encoded voucher, use the ``.serialize()`` API.
 
@@ -183,7 +188,7 @@ COSE-sign it, and finally encode it into a CBOR byte string.
 
 
 Example 3: Decoding a CBOR-encoded voucher into an instance
------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To decode a COSE-signed CBOR-encoded voucher, use the ``voucher.from_cbor`` method.
 
