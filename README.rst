@@ -38,8 +38,18 @@ our internal Cython module builds and Sphinx based docs.
 Installation
 ============
 
-The bindings are tested with `AnimaGUS-minerva/voucher`_ 0.8.8 for
+The bindings are tested with `AnimaGUS-minerva/voucher`_ v0.8.8 for
 Python 3.10, and 3.11 on Linux and macOS.
+
+..  code-block::
+
+    $ git clone https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
+    $ cd python-rfc8366-voucher
+    $ make  # build a `.whl` package
+    $ pip install --force-reinstall ./dist/python_voucher-*.whl
+
+
+For uninstallation, try ``pip uninstall python-voucher``.
 
 .. _AnimaGUS-minerva/voucher: https://github.com/AnimaGUS-minerva/voucher
 
@@ -91,7 +101,7 @@ Example 1: Using the ``Vrq``/``Vch`` class
 Each ``voucher.Vrq`` and ``voucher.Vch`` class abstracts "Voucher Request" and "Voucher" artifacts of
 `Constrained BRSKI`_, respectively. Once the class is instantiated, we can manage its attributes
 using the dedicated API methods (``.get()``, ``.set()``, ``.remove()``, etc.).
-These methods operate with ``ATTR_*`` constants that represents the BRSKI voucher attributes.
+These methods operate with ``ATTR_*`` constants that represent the BRSKI voucher attributes.
 
 In this example, we demonstrate how to use the ``Vrq`` class for a "Voucher Request" instance
 created by ``Vrq()``.  (Note that all of the methods belonging to the ``Vrq`` instance shown below
