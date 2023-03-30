@@ -13,11 +13,9 @@ python-rfc8366-voucher
    :target: https://github.com/AnimaGUS-minerva/python-rfc8366-voucher/actions
 
 
-`python-rfc8366-voucher`_ is a Python bindings around the (compact CBOR-encoded) RFC8366 Voucher
-`Rust library crate`_.
-
-The bindings are tested with `AnimaGUS-minerva/voucher`_ v0.8.8 for
-Python 3.10, and 3.11 on Linux and macOS.
+`python-rfc8366-voucher`_ is a Python bindings around the compact CBOR-encoded RFC8366 Voucher
+`Rust library crate`_ (tested with `AnimaGUS-minerva/voucher`_ v0.8.8 for
+Python 3.10, and 3.11 on Linux and macOS).
 
 .. _python-rfc8366-voucher: https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
 .. _Rust library crate: https://github.com/AnimaGUS-minerva/voucher
