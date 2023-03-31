@@ -53,7 +53,7 @@ To uninstall, try ``pip3 uninstall python-voucher``.
 
 
 Local development
-~~~~~~~~~~~~~~~~~
+=================
 
 To locally install and test the ``python-voucher`` module, try:
 
