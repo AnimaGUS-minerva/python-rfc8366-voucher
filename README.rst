@@ -42,17 +42,27 @@ our internal Cython module builds and Sphinx based docs.
 Installation
 ============
 
-To locally install the ``python-voucher`` module with ``pip``:
+..  code-block::
+
+    $ pip3 install git+https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
+    $ python3
+    >>> import voucher
+
+
+To uninstall, try ``pip3 uninstall python-voucher``.
+
+
+Local development
+~~~~~~~~~~~~~~~~~
+
+To locally install and test the ``python-voucher`` module, try:
 
 ..  code-block::
 
     $ git clone https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
     $ cd python-rfc8366-voucher
     $ make  # build a `.whl` package
-    $ pip install --force-reinstall ./dist/python_voucher-*.whl
-
-
-To uninstall, try ``pip uninstall python-voucher``.
+    $ pip3 install --force-reinstall ./dist/python_voucher-*.whl
 
 
 Usage and examples
