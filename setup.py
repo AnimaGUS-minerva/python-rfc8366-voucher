@@ -5,6 +5,7 @@ import platform
 import re
 import sys
 from contextlib import suppress
+import subprocess
 
 from setuptools import Extension, find_packages, setup
 
@@ -17,7 +18,14 @@ def from_env(var):
         return list(filter(None, os.environ[var].split(ENVSEP)))
     return ()
 
-MODULE_NAME = from_env("SETUP_MODULE_NAME")[0]
+try:
+    # Assuming context: `make dist`
+    MODULE_NAME = from_env("SETUP_MODULE_NAME")[0]
+except IndexError:
+    # Assuming context: `pip install git+https://github.com/AnimaGUS-minerva/python-rfc8366-voucher`
+    MODULE_NAME = "voucher"
+    subprocess.run(["make", "dist"])
+
 
 def _get_version():
     pattern = re.compile(r'^__version__ = ["]([.\w]+?)["]')

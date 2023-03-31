@@ -17,8 +17,9 @@ test-pytest: dist
 	cd ./dist && $(PYTHON) -m pytest --collect-only --quiet ../tests/  # list tests
 	cd ./dist && $(PYTHON) -m pytest ../tests/  # run tests
 test-pip-install: dist
-	pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl
-	#pipenv run pip list
+	pipenv run pip install .
+	#pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl  # debug
+	#pipenv run pip list  # debug
 	pipenv run python ./tests/batch.py
 	pipenv run pip uninstall -y python-voucher
 test:
