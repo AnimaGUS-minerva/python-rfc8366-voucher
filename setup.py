@@ -18,13 +18,20 @@ def from_env(var):
         return list(filter(None, os.environ[var].split(ENVSEP)))
     return ()
 
+
 try:
     # Assuming context: `make dist`
     MODULE_NAME = from_env("SETUP_MODULE_NAME")[0]
 except IndexError:
     # Assuming context: `pip install git+https://github.com/AnimaGUS-minerva/python-rfc8366-voucher`
-    MODULE_NAME = "voucher"
     subprocess.run(["make", "dist"])
+    MODULE_NAME = "voucher"
+    os.environ["C_INCLUDE_PATH"] = "local/include"
+    os.environ["LIBRARY_PATH"] = "local/lib"
+    os.environ["LD_LIBRARY_PATH"] = "local/lib"
+    os.environ["DYLD_LIBRARY_PATH"] = "local/lib"
+    os.environ["SETUP_MODULE_NAME"] = "voucher"
+    os.environ["SETUP_EXTENSION_LIBS"] = "voucher_if"
 
 
 def _get_version():
