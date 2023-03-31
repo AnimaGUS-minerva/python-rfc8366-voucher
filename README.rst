@@ -78,10 +78,10 @@ information of the mbed TLS backend:
 >>> _ = mbedtls_version.version_info  # (3, 0, 0)
 
 
-Basic ``voucher`` examples
---------------------------
+Using BRSKI vouchers
+--------------------
 
-Here we introduce the ``voucher`` abstraction offered by this library,
+Here we introduce the ``voucher`` module abstraction in this library,
 along with its API methods used when dealing with the BRSKI voucher attributes.
 We then present some practical examples on how to perfrom CBOR encoding/decoding of BRSKI vouchers
 with the underlying COSE signing and validation operations also considered.
