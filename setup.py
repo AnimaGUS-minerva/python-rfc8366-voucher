@@ -19,26 +19,22 @@ def from_env(var):
     return ()
 
 
-try:
-    # Assuming context: `make dist`
-    MODULE_NAME = from_env("SETUP_MODULE_NAME")[0]
-except IndexError:
-    # Assuming context: `pip install git+https://github.com/AnimaGUS-minerva/python-rfc8366-voucher`
+if not os.environ.get("FROM_MAKE_DIST", False):
     subprocess.run(["make", "dist"])
-    MODULE_NAME = "voucher"
-    os.environ["C_INCLUDE_PATH"] = "local/include"
-    os.environ["LIBRARY_PATH"] = "local/lib"
-    os.environ["LD_LIBRARY_PATH"] = "local/lib"
-    os.environ["DYLD_LIBRARY_PATH"] = "local/lib"
-    os.environ["SETUP_MODULE_NAME"] = "voucher"
-    os.environ["SETUP_EXTENSION_LIBS"] = "voucher_if"
+
+SETUP_MODULE_NAME = "voucher"
+SETUP_EXTENSION_LIBS = ["voucher_if"]
+os.environ["C_INCLUDE_PATH"] = "local/include"
+os.environ["LIBRARY_PATH"] = "local/lib"
+os.environ["LD_LIBRARY_PATH"] = "local/lib"
+os.environ["DYLD_LIBRARY_PATH"] = "local/lib"
 
 
 def _get_version():
     pattern = re.compile(r'^__version__ = ["]([.\w]+?)["]')
     with open(
         os.path.join(
-            "src", MODULE_NAME, "__init__.py"
+            "src", SETUP_MODULE_NAME, "__init__.py"
         )
     ) as f:
         for line in f:
@@ -82,7 +78,7 @@ def extensions(coverage=False):
             "mbedTLS",
         ]
         if WINDOWS
-        else from_env("SETUP_EXTENSION_LIBS")
+        else SETUP_EXTENSION_LIBS
     )
     library_dirs = from_env("LIBPATH" if WINDOWS else "LIBRARY_PATH")
 
@@ -128,7 +124,7 @@ print('@@ COVERAGE:', COVERAGE)
 print('@@ ext_modules:', list(extensions(COVERAGE)))
 print('@@ packages:', find_packages("src"))
 setup(
-    name=f"python-{MODULE_NAME}",
+    name=f"python-{SETUP_MODULE_NAME}",
     version=VERSION,
     ext_modules=list(extensions(COVERAGE)),
     #options=options(COVERAGE),
