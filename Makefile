@@ -16,16 +16,18 @@ test-batch: dist
 test-pytest: dist
 	cd ./dist && $(PYTHON) -m pytest --collect-only --quiet ../tests/  # list tests
 	cd ./dist && $(PYTHON) -m pytest ../tests/  # run tests
-test-pip-install: dist
+test-pip-install-local: dist
 	pipenv run pip install .
 	#pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl  # debug
-	#pipenv run pip list  # debug
 	pipenv run python ./tests/batch.py
 	pipenv run pip uninstall -y python-voucher
+test-pip-install-remote:
+	pip3 install git+https://github.com/AnimaGUS-minerva/python-rfc8366-voucher
 test:
 	make test-batch
 	make test-pytest
-	make test-pip-install
+	make test-pip-install-local
+	make test-pip-install-remote
 
 #
 
