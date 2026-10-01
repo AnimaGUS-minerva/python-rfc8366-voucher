@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# !! `.lib_dir` on `zig env`
+LIB=/usr/local/Cellar/zig/0.16.0_1/lib/zig
+
+ISYS=""
+for d in \
+  "$LIB/include" \
+  "$LIB/libc/include/generic-musl" \
+  "$LIB/libc/include/x86_64-linux-musl" \
+  "$LIB/libc/include/any-linux-any" \
+  "$LIB/libc/musl/include"
+do
+  [ -d "$d" ] && ISYS="$ISYS -isystem $d"
+done
+
+#echo "LIB=$LIB ISYS=$ISYS"
+
+exec zig cc -target x86_64-linux-musl $ISYS "$@"
