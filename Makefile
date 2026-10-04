@@ -44,7 +44,7 @@ sync-voucher:
 
 VOUCHER_IF_CRATE_PATH := ./voucher/if
 local: get-voucher
-	make build-std -C $(VOUCHER_IF_CRATE_PATH)
+	cd $(VOUCHER_IF_CRATE_PATH) && cargo build --lib --release --features std
 	mkdir -p local
 	mkdir -p local/lib && cp $(VOUCHER_IF_CRATE_PATH)/target/release/libvoucher_if.a local/lib/
 	mkdir -p local/include && cp -r $(VOUCHER_IF_CRATE_PATH)/include/* local/include/
