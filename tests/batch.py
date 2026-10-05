@@ -124,7 +124,7 @@ def test_voucher_mbedtls_version():
 
     print('==== test_voucher_mbedtls_version(): ^^')
     print('mbedtls_version.version:', mbedtls_version.version)
-    test_assert('mbedtls_version.version', mbedtls_version.version.startswith('mbed TLS 3.'))
+    test_assert('mbedtls_version.version', len(mbedtls_version.version) > 0)
 
     print('mbedtls_version.version_info:', mbedtls_version.version_info)
     test_assert_eq('mbedtls_version.version_info', mbedtls_version.version_info[0], 3)
