@@ -249,7 +249,7 @@ def test_voucher_apis():
 
     #
 
-    vch = from_cbor(_voucher.debug_get_vch_jada())#.debug_dump()
+    vch = from_cbor(_voucher.debug_get_vch_jada()).debug_dump()
 
     print('* `.get()` `int` attributes in vch_jada')
     test_assert_eq('get - ATTR_ASSERTION', vch.get(ATTR_ASSERTION), ASSERTION_PROXIMITY)
