@@ -6,8 +6,10 @@ name = "pypi"
 [packages]
 wheel = "*"
 pytest = "*"
+setuptools = "*"
 
 [dev-packages]
+cython = ">=3.0.12"
 pytest = "*"
 exceptiongroup = "*"
 sphinx = "*"
