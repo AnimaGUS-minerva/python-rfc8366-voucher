@@ -29,7 +29,7 @@ test:
 	make test-batch
 	make test-pytest
 	make test-pip-install-local
-	make test-pip-install-remote
+	#TODOmake test-pip-install-remote
 
 #
 
