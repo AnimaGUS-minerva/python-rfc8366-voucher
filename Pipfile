@@ -10,6 +10,7 @@ setuptools = "*"
 
 [dev-packages]
 cython = ">=3.0.12"
+build = "*"
 pytest = "*"
 exceptiongroup = "*"
 sphinx = "*"

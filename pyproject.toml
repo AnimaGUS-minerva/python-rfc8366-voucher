@@ -1,0 +1,8 @@
+[build-system]
+# PEP 517. `python -m build` / `pip wheel` / `pip install` call this backend.
+# Do not invoke `python setup.py` directly (setuptools deprecates that CLI).
+requires = [
+    "setuptools>=68",
+    "Cython>=3.0.12",
+]
+build-backend = "setuptools.build_meta"

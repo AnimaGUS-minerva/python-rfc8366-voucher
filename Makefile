@@ -18,8 +18,8 @@ test-pytest: dist
 	cd ./dist && $(PYTHON) -m pytest ../tests/  # run tests
 
 test-pip-install-local: dist
-	pipenv run pip install .
-	#pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl  # debug
+	# Install the wheel just built. Do not `pip install .` (that rebuilds via setup.py).
+	pipenv run pip install --force-reinstall ./dist/python_voucher-*.whl
 	pipenv run python ./tests/batch.py
 	pipenv run pip uninstall -y python-voucher
 test-pip-install-remote:
@@ -49,14 +49,19 @@ local: get-voucher
 	mkdir -p local/lib && cp $(VOUCHER_IF_CRATE_PATH)/target/release/libvoucher_if.a local/lib/
 	mkdir -p local/include && cp -r $(VOUCHER_IF_CRATE_PATH)/include/* local/include/
 
+# PEP 517 frontend. --no-isolation uses the pipenv env (Cython is a dev dep).
+# `python -m build` still packs an sdist first, so MANIFEST.in must graft local/.
+#
+# MANIFEST.in grafts local/. `python -m build` packs an sdist, then builds the
+# wheel from that sdist, so without this the wheel build will not see libvoucher_if.a.
 dist: local
 	ls -lrt local/include local/lib
-	FROM_MAKE_DIST=1  pipenv run python ./setup.py bdist_wheel
+	pipenv run python -m build --wheel --no-isolation --outdir dist
 	cd ./dist && \
 		rm -rf voucher python_voucher-*info && \
-		unzip python_voucher-*.whl && \
+		unzip -o python_voucher-*.whl && \
 		ls -lrt
 clean:
-	rm -rf dist
+	rm -rf dist build
 purge:
 	rm -rf dist build local ./src/*.egg-info
